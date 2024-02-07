@@ -3,9 +3,7 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.example.entities.Employee;
-import org.example.entities.Product;
-import org.example.entities.Student;
+import org.example.entities.*;
 import org.example.entities.keys.ProductKey;
 import org.example.entities.keys.StudentKey;
 import org.example.persistence.CustomPersistenceUnitInfo;
@@ -14,8 +12,6 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import java.util.HashMap;
 import java.util.Map;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         EntityManager em;
@@ -23,27 +19,21 @@ public class Main {
             // Represents the context
         Map<String,String> props = new HashMap<>();
         props.put("hibernate.show_sql","true");
-        props.put("hibernate.hbm2ddl.auto","update");
+        props.put("hibernate.hbm2ddl.auto","create");
         EntityManagerFactory emf = new HibernatePersistenceProvider().createContainerEntityManagerFactory(new CustomPersistenceUnitInfo(),
                 props);
         em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
-//            Product p1 = new Product();
-//            p1.setCode("abc");
-//            p1.setNumber(10);
-//            p1.setColor("Red");
-//            em.persist(p1);
-            StudentKey sk = new StudentKey();
-            sk.setCode("11241");
-            sk.setNumber(1151);
-//            Student student = new Student();
-//            student.setId(sk);
-//            student.setName("Siddhu");
-//            em.persist(student);
-            Student s = em.find(Student.class,sk);
-            System.out.println(s);
+            Post p = new Post();
+            p.setTitle("Post 1");
+            p.setContent("POst 1 content");
+            Comment c1 = new Comment();
+            c1.setPost(p);
+            c1.setContent("Content comment 1");
+            em.persist(c1);
+            em.persist(p);
             em.getTransaction().commit();
         }
         finally {
