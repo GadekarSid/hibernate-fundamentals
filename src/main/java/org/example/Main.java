@@ -10,6 +10,7 @@ import org.example.persistence.CustomPersistenceUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -26,14 +27,14 @@ public class Main {
 
         try {
             em.getTransaction().begin();
-            Post p = new Post();
-            p.setTitle("Post 1");
-            p.setContent("POst 1 content");
-            Comment c1 = new Comment();
-            c1.setPost(p);
-            c1.setContent("Content comment 1");
-            em.persist(c1);
-            em.persist(p);
+            Book book = new Book();
+            book.setAuthor("Hiten");
+            book.setId(1L);
+            em.persist(book);
+            ElectronicDevice device = new ElectronicDevice();
+            device.setVoltage("10w");
+            device.setId(2L);
+            em.persist(device);
             em.getTransaction().commit();
         }
         finally {

@@ -65,7 +65,12 @@ public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
         ,"org.example.entities.Passport"
         ,"org.example.entities.Person"
         ,"org.example.entities.Post"
-        ,"org.example.entities.Comment");
+        ,"org.example.entities.Comment"
+        ,"org.example.entities.Group"
+        ,"org.example.entities.User"
+        ,"org.example.entities.Item"
+        ,"org.example.entities.Book"
+        ,"org.example.entities.ElectronicDevice");
     }
 
     @Override
